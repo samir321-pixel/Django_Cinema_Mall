@@ -41,9 +41,12 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'rest_auth',
     'allauth',
+    'phone_field',
     'allauth.account',
+    'localflavor',
     'rest_auth.registration',
     'user',
+    'customer',
     'corsheaders',
 ]
 SITE_ID=1
