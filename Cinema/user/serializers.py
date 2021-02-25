@@ -12,12 +12,13 @@ class CoreRegisterSerializer(RegisterSerializer):
 
     class Meta:
         model = models.User
-        fields = ('email', 'username', 'password', 'is_admin', 'is_employee', 'is_customer')
+        fields = ('email', 'username', 'password', 'is_admin', 'is_employee', 'is_customer', 'first_name')
 
     def get_cleaned_data(self):
         return {
             'username': self.validated_data.get('username', ''),
             'email': self.validated_data.get('email', ''),
+            'first_name': self.validated_data.get('first_name', ''),
             'password1': self.validated_data.get('password1', ''),
             'password2': self.validated_data.get('password2', ''),
             'is_admin': self.validated_data.get('is_admin', ''),
@@ -32,6 +33,7 @@ class CoreRegisterSerializer(RegisterSerializer):
         user.is_admin = self.cleaned_data.get('is_admin')
         user.is_employee = self.cleaned_data.get('is_employee')
         user.is_customer = self.cleaned_data.get('is_customer')
+        user.first_name = self.cleaned_data.get('first_name')
         user.save()
         adapter.save_user(request, user, self)
         return user
@@ -40,7 +42,7 @@ class CoreRegisterSerializer(RegisterSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.User
-        fields = ('email', 'username', 'password', 'is_admin', 'is_employee', 'is_customer')
+        fields = ('email', 'username', 'password', 'is_admin', 'is_employee', 'is_customer', 'first_name')
 
 
 class ChangePasswordSerializer(serializers.Serializer):
