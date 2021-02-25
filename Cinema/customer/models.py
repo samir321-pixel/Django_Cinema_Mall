@@ -11,7 +11,7 @@ GENDER_CHOICES = (
 
 # Create your models here.
 class Customer(models.Model):
-    user = models.ForeignKey('user.User', on_delete=models.CASCADE, null=True, blank=True)
+    user = models.ForeignKey('user.User', on_delete=models.CASCADE)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100, null=True, blank=True)
     date_of_birth = models.DateField(auto_now=False)
