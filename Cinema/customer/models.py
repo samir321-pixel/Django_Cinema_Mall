@@ -13,7 +13,6 @@ GENDER_CHOICES = (
 class Customer(models.Model):
     user = models.ForeignKey('user.User', on_delete=models.CASCADE, null=True, blank=True)
     first_name = models.CharField(max_length=100)
-    middle_name = models.CharField(max_length=100, null=True, blank=True)
     last_name = models.CharField(max_length=100, null=True, blank=True)
     date_of_birth = models.DateField(auto_now=False)
     gender = models.CharField(choices=GENDER_CHOICES, max_length=30, default="Male")
