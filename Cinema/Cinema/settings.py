@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'rest_auth.registration',
     'user',
     'customer',
+    'manage_cinema',
     'corsheaders',
 ]
 SITE_ID=1
