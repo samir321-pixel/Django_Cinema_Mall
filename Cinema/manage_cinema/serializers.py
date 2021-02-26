@@ -9,6 +9,8 @@ class CinemaSerializer(serializers.ModelSerializer):
 
 
 class CinemaDeckSerializer(serializers.ModelSerializer):
+    price = serializers.CharField(max_length=200)
+
     class Meta:
         model = Cinema_Deck
         fields = '__all__'
@@ -24,3 +26,4 @@ class CinemaArrangeSlotSerializer(serializers.ModelSerializer):
     class Meta:
         model = CinemaArrangeSlot
         fields = '__all__'
+        depth = 1
