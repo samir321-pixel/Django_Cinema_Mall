@@ -43,7 +43,7 @@ class CinemaArrangeSlot(models.Model):
     id = models.AutoField(primary_key=True)
     cinema = models.ForeignKey("manage_cinema.Cinema", on_delete=models.CASCADE)
     start_time = models.TimeField(unique=True)
-    duration = models.ForeignKey("manage_cinema.CinemaSlotsDuration", on_delete=models.CASCADE)
+    duration_slot = models.ForeignKey("manage_cinema.CinemaSlotsDuration", on_delete=models.CASCADE)
     end_time = models.TimeField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now=True)
     updated_at = models.DateTimeField(auto_now=True)
