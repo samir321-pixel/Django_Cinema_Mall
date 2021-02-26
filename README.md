@@ -26,4 +26,4 @@
 ## Useful Resources
 - [Django Docs](https://docs.djangoproject.com/en/3.0/)
 - [Git and GitHub](https://www.digitalocean.com/community/tutorials/how-to-use-git-a-reference-guide)
-- [Beautiful-Soup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/)
+
