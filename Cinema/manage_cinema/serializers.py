@@ -22,8 +22,14 @@ class CinemaSlotsDurationSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class CinemaArrangeSlotSerializer(serializers.ModelSerializer):
+class CinemaArrangeSlotReadSerializer(serializers.ModelSerializer):
     class Meta:
         model = CinemaArrangeSlot
         fields = '__all__'
         depth = 1
+
+
+class CinemaArrangeSlotWriteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CinemaArrangeSlot
+        fields = '__all__'

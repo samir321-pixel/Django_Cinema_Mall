@@ -22,4 +22,4 @@ class CinemaSlotsDurationViewsets(viewsets.ModelViewSet):
 
 class CinemaArrangeSlotViewsets(viewsets.ModelViewSet):
     queryset = CinemaArrangeSlot.objects.all()
-    serializer_class = CinemaArrangeSlotSerializer
+    serializer_class = CinemaArrangeSlotWriteSerializer
