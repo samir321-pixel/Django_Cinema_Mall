@@ -49,8 +49,9 @@ INSTALLED_APPS = [
     'customer',
     'manage_cinema',
     'corsheaders',
+    'cinema_booking',
 ]
-SITE_ID=1
+SITE_ID = 1
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
