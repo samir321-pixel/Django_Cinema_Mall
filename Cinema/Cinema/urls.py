@@ -20,6 +20,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('rest-auth/', include('rest_auth.urls')),
     path('rest-auth/registration/', include('rest_auth.registration.urls')),
-    path('manage_cinema/', include('manage_cinema.urls')),
+    path('managecinema/', include('managecinema.urls')),
     path('cinema_booking/', include('cinema_booking.urls')),
 ]

@@ -7,7 +7,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('manage_cinema', '0010_auto_20210227_1022'),
+        ('managecinema', '0010_auto_20210227_1022'),
         ('cinema_booking', '0004_available_slots_deck'),
     ]
 
@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
             name='seats',
             fields=[
                 ('id', models.AutoField(primary_key=True, serialize=False)),
-                ('deck', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='manage_cinema.cinema_deck')),
+                ('deck', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='managecinema.cinema_deck')),
             ],
         ),
     ]
