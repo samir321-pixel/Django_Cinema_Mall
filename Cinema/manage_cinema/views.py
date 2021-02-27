@@ -137,13 +137,13 @@ class CinemaSlotsDurationViewsets(viewsets.ModelViewSet):
 
 
 class CinemaArrangeSlotViewsets(viewsets.ModelViewSet):
-    queryset = CinemaArrangeSlot.objects.all()
+    queryset = CinemaArrangeSlot.objects.all().order_by('created_at')
     serializer_class = CinemaArrangeSlotWriteSerializer
     permission_classes = (IsAuthenticated,)
 
-    def get_queryset(self):
-        self.get_serializer(CinemaArrangeSlotReadSerializer)
-        return CinemaArrangeSlot.objects.all().order_by('-created_at')
+    def list(self, request, *args, **kwargs):
+        serializer = CinemaArrangeSlotReadSerializer(self.get_queryset(), many=True)
+        return Response(serializer.data, status=200)
 
     def create(self, request, *args, **kwargs):
         if self.request.user.is_admin or self.request.user.is_employee:

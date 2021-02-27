@@ -63,7 +63,7 @@ class CinemaArrangeSlot(models.Model):
         for i in query:
             if not Available_Slots.objects.filter(slot=i, date=datetime.date.today()):
                 Available_Slots.objects.create(slot=i, date=datetime.datetime.today())
-            for j in range(0, 3):
+            for j in range(0, 2):
                 dates += datetime.timedelta(days=1)
                 if not Available_Slots.objects.filter(slot=i, date=dates):
                     Available_Slots.objects.create(slot=i, date=dates)
