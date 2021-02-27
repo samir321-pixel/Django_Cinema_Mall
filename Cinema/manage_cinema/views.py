@@ -97,8 +97,45 @@ class CinemaSlotsDurationViewsets(viewsets.ModelViewSet):
     serializer_class = CinemaSlotsDurationSerializer
     permission_classes = (IsAuthenticated,)
 
+    def get_queryset(self):
+        return CinemaSlotsDuration.objects.all().order_by('-created_at')
+
+    def create(self, request, *args, **kwargs):
+        if self.request.user.is_admin or self.request.user.is_employee:
+            serializer = self.get_serializer(data=request.data)
+            if serializer.is_valid(raise_exception=True):
+                serializer.save()
+            return Response(serializer.data, status=200)
+        else:
+            return Response({"NO_ACCESS": "Access Denied"}, status=401)
+
+    def update(self, request, *args, **kwargs):
+        try:
+            instance = CinemaSlotsDuration.objects.get(id=self.kwargs["id"])
+        except ObjectDoesNotExist:
+            return Response({"DOES_NOT_EXIST": "Does not exist"}, status=400)
+        if self.request.user.is_admin or self.request.user.is_employee:
+            serializer = self.get_serializer(instance, data=request.data, partial=True)
+            if serializer.is_valid(raise_exception=True):
+                serializer.save()
+                return Response(serializer.data, status=200)
+            else:
+                return Response({"error": "Access Denied"}, status=401)
+
+    def destroy(self, request, *args, **kwargs):
+        try:
+            instance = CinemaSlotsDuration.objects.get(id=self.kwargs["id"])
+        except ObjectDoesNotExist:
+            return Response({"DOES_NOT_EXIST": "Does not exist"}, status=400)
+        if self.request.user.is_admin or self.request.user.is_employee:
+            instance.delete()
+            return Response({"successful": "Access Granted"}, status=200)
+        else:
+            return Response({"error": "Access Denied"}, status=401)
+
 
 class CinemaArrangeSlotViewsets(viewsets.ModelViewSet):
     queryset = CinemaArrangeSlot.objects.all()
     serializer_class = CinemaArrangeSlotWriteSerializer
     permission_classes = (IsAuthenticated,)
+    
