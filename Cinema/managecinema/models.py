@@ -1,7 +1,7 @@
 import datetime
 from django.db import models
 from djmoney.models.fields import MoneyField
-from cinema_booking.models import Available_Slots
+from cinema_booking.models import Available_Slots, seat_manager, Seat
 
 
 class Cinema(models.Model):
@@ -56,7 +56,6 @@ class CinemaArrangeSlot(models.Model):
     def slot_maker(self):
         query = CinemaArrangeSlot.objects.all()
         dates = datetime.date.today()
-        print(CinemaDeck.objects.all())
         for i in query:
             if not Available_Slots.objects.filter(slot=i, date=datetime.date.today()):
                 Available_Slots.objects.create(slot=i, date=datetime.datetime.today(), active=True)
@@ -68,4 +67,13 @@ class CinemaArrangeSlot(models.Model):
                     pass
 
     def seat_maker(self):
-        print(CinemaDeck.objects.all)
+        deck_query = CinemaDeck.objects.all
+        seat_manager_query = seat_manager.objects.all()
+        available_slots_query = Available_Slots.objects.all()
+
+        for i in CinemaDeck.objects.all():
+            for j in seat_manager.objects.all():
+                for k in Available_Slots.objects.all():
+                    for l in range(1, 5):
+                        Seat.objects.create(name=l, deck=i, date=k.date, seat=j,
+                                            available_slot=k)

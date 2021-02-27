@@ -5,6 +5,7 @@ from .views import *
 
 router = routers.DefaultRouter()
 router.register('cinema', AvailableSlotsViewsets, 'cinema')
+router.register('seat', SeatsViewsets, 'seat')
 
 urlpatterns = [
     path(r'', include(router.urls)),

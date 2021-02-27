@@ -159,6 +159,7 @@ class CinemaArrangeSlotViewsets(viewsets.ModelViewSet):
                 get_query.save()
                 if data:
                     CinemaArrangeSlot.slot_maker(self=self)
+                    CinemaArrangeSlot.seat_maker(self=self)
                 serializer = CinemaArrangeSlotReadSerializer(get_query)
             return Response(serializer.data, status=200)
         else:

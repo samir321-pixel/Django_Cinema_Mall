@@ -8,3 +8,8 @@ from rest_framework.response import Response
 class AvailableSlotsViewsets(viewsets.ModelViewSet):
     queryset = Available_Slots.objects.all()
     serializer_class = AvailableSlotsReadSerializer
+
+
+class SeatsViewsets(viewsets.ModelViewSet):
+    queryset = Seat.objects.all().order_by('-date')
+    serializer_class = SeatSerializer
