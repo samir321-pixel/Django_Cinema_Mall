@@ -1,5 +1,7 @@
 from rest_framework import viewsets
 from rest_framework.response import Response
+
+from cinema_booking.models import Available_Slots
 from .models import *
 from .serializers import *
 from rest_framework.permissions import IsAuthenticated
@@ -140,13 +142,24 @@ class CinemaArrangeSlotViewsets(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated,)
 
     def get_queryset(self):
-        return CinemaSlotsDuration.objects.all().order_by('-created_at')
+        self.get_serializer(CinemaArrangeSlotReadSerializer)
+        return CinemaArrangeSlot.objects.all().order_by('-created_at')
 
     def create(self, request, *args, **kwargs):
         if self.request.user.is_admin or self.request.user.is_employee:
-            serializer = self.get_serializer(data=request.data)
+            serializer = CinemaArrangeSlotWriteSerializer(data=request.data)
             if serializer.is_valid(raise_exception=True):
-                serializer.save()
+                data = serializer.save()
+                query = CinemaSlotsDuration.objects.get(id=(request.data.get('duration_slot')))
+                get_query = CinemaArrangeSlot.objects.get(id=data.id)
+                fulldate = datetime.datetime(100, 1, 1, (get_query.start_time).hour, (get_query.start_time).minute,
+                                             (get_query.start_time).second)
+                next_time = fulldate + datetime.timedelta(seconds=(query.duration).seconds)
+                get_query.end_time = next_time.time()
+                get_query.save()
+                if data:
+                    CinemaArrangeSlot.slot_maker(self=self)
+                serializer = CinemaArrangeSlotReadSerializer(get_query)
             return Response(serializer.data, status=200)
         else:
             return Response({"NO_ACCESS": "Access Denied"}, status=401)
