@@ -7,4 +7,4 @@ from rest_framework.response import Response
 # Create your views here.
 class AvailableSlotsViewsets(viewsets.ModelViewSet):
     queryset = Available_Slots.objects.all()
-    serializer_class = AvailableSlotsSerializer
+    serializer_class = AvailableSlotsReadSerializer

@@ -18,7 +18,8 @@ class Available_Slots(models.Model):
 class Seat(models.Model):
     id = models.AutoField(primary_key=True)
     deck = models.ForeignKey("manage_cinema.Cinema_Deck", on_delete=models.CASCADE)
-    date=models.DateField(auto_now=False)
+    date = models.DateField(auto_now=False)
+    date_slots = models.ForeignKey("cinema_booking.Available_Slots", on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now=True)
     updated_at = models.DateTimeField(auto_now=True)
     active = models.BooleanField(default=True)

@@ -149,7 +149,7 @@ class CinemaArrangeSlotViewsets(viewsets.ModelViewSet):
         if self.request.user.is_admin or self.request.user.is_employee:
             serializer = CinemaArrangeSlotWriteSerializer(data=request.data)
             if serializer.is_valid(raise_exception=True):
-                data = serializer.save()
+                data = serializer.save(active=True)
                 query = MovieDurationSlot.objects.get(id=(request.data.get('duration_slot')))
                 get_query = CinemaArrangeSlot.objects.get(id=data.id)
                 fulldate = datetime.datetime(100, 1, 1, (get_query.start_time).hour, (get_query.start_time).minute,
