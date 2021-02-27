@@ -74,6 +74,9 @@ class CinemaArrangeSlot(models.Model):
         for i in CinemaDeck.objects.all():
             for j in seat_manager.objects.all():
                 for k in Available_Slots.objects.all():
-                    for l in range(1, 5):
-                        Seat.objects.create(name=l, deck=i, date=k.date, seat=j,
-                                            available_slot=k)
+                    for l in range(0, 2):
+                        if not Seat.objects.filter(name=l, deck=i, date=k.date, seat=j, available_slot=k):
+                            Seat.objects.create(name=l, deck=i, date=k.date, seat=j,
+                                                available_slot=k)
+                        if Seat.objects.filter(name=l, deck=i, date=k.date, seat=j, available_slot=k):
+                            pass

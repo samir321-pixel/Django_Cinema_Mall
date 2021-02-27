@@ -8,7 +8,7 @@ from rest_framework.permissions import IsAuthenticated
 from django.core.exceptions import ObjectDoesNotExist
 
 
-# Create your views here.
+
 class CinemaViewsets(viewsets.ModelViewSet):
     queryset = Cinema.objects.all()
     serializer_class = CinemaSerializer

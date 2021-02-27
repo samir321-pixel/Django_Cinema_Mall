@@ -36,4 +36,4 @@ class Seat(models.Model):
     book = models.BooleanField(default=False)
 
     def __str__(self):
-        return "{}-{}-{}".format(self.seat, self.name, self.date)
+        return "{}-{}-{}-{}".format(self.seat, self.name, self.date, self.deck)

@@ -1,5 +1,4 @@
 from rest_framework import serializers
-
 from managecinema.serializers import CinemaDeckSerializer
 from .models import *
 
