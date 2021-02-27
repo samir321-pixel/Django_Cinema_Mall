@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'customer',
     'managecinema',
     'corsheaders',
+    'drf_yasg',
     'cinema_booking',
 ]
 SITE_ID = 1
