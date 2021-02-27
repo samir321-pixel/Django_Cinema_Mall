@@ -6,7 +6,7 @@ from django.db import models
 class Available_Slots(models.Model):
     id = models.AutoField(primary_key=True)
     date = models.DateField(auto_now=False)
-    slot = models.ForeignKey("manage_cinema.CinemaArrangeSlot", on_delete=models.CASCADE, null=True, blank=True)
+    slot = models.ForeignKey("manage_cinema.CinemaArrangeSlot", on_delete=models.CASCADE)
 
     def __str__(self):
         return "{}".format(self.date)
