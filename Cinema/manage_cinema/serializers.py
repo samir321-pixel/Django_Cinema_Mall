@@ -16,9 +16,9 @@ class CinemaDeckSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class CinemaSlotsDurationSerializer(serializers.ModelSerializer):
+class MovieDurationSlotSerializer(serializers.ModelSerializer):
     class Meta:
-        model = CinemaSlotsDuration
+        model = MovieDurationSlot
         fields = '__all__'
 
 

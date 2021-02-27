@@ -33,7 +33,7 @@ class Cinema_Deck(models.Model):
         return "{}{}".format(self.deck_name, self.price)
 
 
-class CinemaSlotsDuration(models.Model):
+class MovieDurationSlot(models.Model):
     id = models.AutoField(primary_key=True)
     duration = models.DurationField(unique=True)
     created_at = models.DateTimeField(auto_now=True)
@@ -48,7 +48,7 @@ class CinemaArrangeSlot(models.Model):
     id = models.AutoField(primary_key=True)
     cinema = models.ForeignKey("manage_cinema.Cinema", on_delete=models.CASCADE)
     start_time = models.TimeField(unique=True)
-    duration_slot = models.ForeignKey("manage_cinema.CinemaSlotsDuration", on_delete=models.CASCADE)
+    duration_slot = models.ForeignKey("manage_cinema.MovieDurationSlot", on_delete=models.CASCADE)
     end_time = models.TimeField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -63,7 +63,7 @@ class CinemaArrangeSlot(models.Model):
         for i in query:
             if not Available_Slots.objects.filter(slot=i, date=datetime.date.today()):
                 Available_Slots.objects.create(slot=i, date=datetime.datetime.today())
-            for j in range(0, 4):
+            for j in range(0, 3):
                 dates += datetime.timedelta(days=1)
                 if not Available_Slots.objects.filter(slot=i, date=dates):
                     Available_Slots.objects.create(slot=i, date=dates)

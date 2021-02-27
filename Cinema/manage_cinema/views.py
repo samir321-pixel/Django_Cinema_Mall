@@ -95,12 +95,12 @@ class CinemaDeckViewsets(viewsets.ModelViewSet):
 
 
 class CinemaSlotsDurationViewsets(viewsets.ModelViewSet):
-    queryset = CinemaSlotsDuration.objects.all()
-    serializer_class = CinemaSlotsDurationSerializer
+    queryset = MovieDurationSlot.objects.all()
+    serializer_class = MovieDurationSlotSerializer
     permission_classes = (IsAuthenticated,)
 
     def get_queryset(self):
-        return CinemaSlotsDuration.objects.all().order_by('-created_at')
+        return MovieDurationSlot.objects.all().order_by('-created_at')
 
     def create(self, request, *args, **kwargs):
         if self.request.user.is_admin or self.request.user.is_employee:
@@ -113,7 +113,7 @@ class CinemaSlotsDurationViewsets(viewsets.ModelViewSet):
 
     def update(self, request, *args, **kwargs):
         try:
-            instance = CinemaSlotsDuration.objects.get(id=self.kwargs["id"])
+            instance = MovieDurationSlot.objects.get(id=self.kwargs["id"])
         except ObjectDoesNotExist:
             return Response({"DOES_NOT_EXIST": "Does not exist"}, status=400)
         if self.request.user.is_admin or self.request.user.is_employee:
@@ -126,7 +126,7 @@ class CinemaSlotsDurationViewsets(viewsets.ModelViewSet):
 
     def destroy(self, request, *args, **kwargs):
         try:
-            instance = CinemaSlotsDuration.objects.get(id=self.kwargs["id"])
+            instance = MovieDurationSlot.objects.get(id=self.kwargs["id"])
         except ObjectDoesNotExist:
             return Response({"DOES_NOT_EXIST": "Does not exist"}, status=400)
         if self.request.user.is_admin or self.request.user.is_employee:
@@ -150,7 +150,7 @@ class CinemaArrangeSlotViewsets(viewsets.ModelViewSet):
             serializer = CinemaArrangeSlotWriteSerializer(data=request.data)
             if serializer.is_valid(raise_exception=True):
                 data = serializer.save()
-                query = CinemaSlotsDuration.objects.get(id=(request.data.get('duration_slot')))
+                query = MovieDurationSlot.objects.get(id=(request.data.get('duration_slot')))
                 get_query = CinemaArrangeSlot.objects.get(id=data.id)
                 fulldate = datetime.datetime(100, 1, 1, (get_query.start_time).hour, (get_query.start_time).minute,
                                              (get_query.start_time).second)

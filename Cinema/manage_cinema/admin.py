@@ -5,4 +5,4 @@ from .models import *
 admin.site.register(Cinema)
 admin.site.register(Cinema_Deck)
 admin.site.register(CinemaArrangeSlot)
-admin.site.register(CinemaSlotsDuration)
+admin.site.register(MovieDurationSlot)
