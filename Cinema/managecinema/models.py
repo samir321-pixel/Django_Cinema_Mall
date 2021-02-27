@@ -69,10 +69,19 @@ class CinemaArrangeSlot(models.Model):
     def seat_maker(self):
         for i in CinemaDeck.objects.all():
             for j in seat_manager.objects.all():
-                for k in Available_Slots.objects.all():
-                    for l in range(0, 10):
+                for k in Available_Slots.objects.filter(active=True):
+                    for l in range(0, 2):
                         if not Seat.objects.filter(name=l, deck=i, date=k.date, seat=j, available_slot=k):
                             Seat.objects.create(name=l, deck=i, date=k.date, seat=j,
                                                 available_slot=k)
                         if Seat.objects.filter(name=l, deck=i, date=k.date, seat=j, available_slot=k):
                             pass
+
+    def slot_updater(self):
+        for i in Available_Slots.objects.all():
+            try:
+                if datetime.datetime.now() > datetime.datetime.combine(i.date, datetime.time(0, 0)):
+                    i.active = False
+                    i.save()
+            except Exception as e:
+                pass

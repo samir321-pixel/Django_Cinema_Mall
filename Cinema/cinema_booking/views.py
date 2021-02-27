@@ -21,6 +21,7 @@ class SeatsViewsets(viewsets.ModelViewSet):
     search_fields = ['name', 'deck__deck_name', 'date']
 
     def get_queryset(self):
+        CinemaArrangeSlot.slot_updater(self=self)
         CinemaArrangeSlot.slot_maker(self=self)
         CinemaArrangeSlot.seat_maker(self=self)
         return Seat.objects.all().order_by('-date')

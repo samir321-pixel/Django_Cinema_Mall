@@ -8,7 +8,6 @@ from rest_framework.permissions import IsAuthenticated
 from django.core.exceptions import ObjectDoesNotExist
 
 
-
 class CinemaViewsets(viewsets.ModelViewSet):
     queryset = Cinema.objects.all()
     serializer_class = CinemaSerializer
@@ -158,6 +157,7 @@ class CinemaArrangeSlotViewsets(viewsets.ModelViewSet):
                 get_query.end_time = next_time.time()
                 get_query.save()
                 if data:
+                    CinemaArrangeSlot.slot_updater(self=self)
                     CinemaArrangeSlot.slot_maker(self=self)
                     CinemaArrangeSlot.seat_maker(self=self)
                 serializer = CinemaArrangeSlotReadSerializer(get_query)
