@@ -25,3 +25,8 @@ class SeatsViewsets(viewsets.ModelViewSet):
         CinemaArrangeSlot.slot_maker(self=self)
         CinemaArrangeSlot.seat_maker(self=self)
         return Seat.objects.all().order_by('-date')
+
+
+class BookSeatsViewsets(viewsets.ModelViewSet):
+    queryset = BookSeat.objects.all().order_by('-created_at')
+    serializer_class = BookSeatSerializer

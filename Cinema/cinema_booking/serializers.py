@@ -17,3 +17,9 @@ class SeatSerializer(serializers.ModelSerializer):
         model = Seat
         fields = '__all__'
         depth = 1
+
+
+class BookSeatSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = BookSeat
+        fields = '__all__'
