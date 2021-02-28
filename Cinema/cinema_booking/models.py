@@ -1,6 +1,7 @@
 from datetime import datetime
-
+from creditcards.models import CardNumberField, CardExpiryField, SecurityCodeField
 from django.db import models
+from djmoney.models.fields import MoneyField
 
 
 class Available_Slots(models.Model):
@@ -51,7 +52,12 @@ class Seat(models.Model):
 
 class BookSeat(models.Model):
     id = models.AutoField(primary_key=True)
-    seat = models.ForeignKey(Seat, on_delete=models.CASCADE, unique=True)
+    seat = models.OneToOneField(Seat, on_delete=models.CASCADE, unique=True)
+    booking_price = MoneyField(default=0, default_currency='INR', max_digits=11)
+    name_on_card = models.CharField(max_length=150)
+    cc_number = CardNumberField('card number')
+    cc_expiry = CardExpiryField('expiration date')
+    cc_code = SecurityCodeField('security code')
     created_at = models.DateTimeField(auto_now=True)
     updated_at = models.DateTimeField(auto_now=True)
     user = models.ForeignKey("user.User", on_delete=models.CASCADE, null=True, blank=True)

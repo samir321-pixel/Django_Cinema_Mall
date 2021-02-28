@@ -14,7 +14,7 @@ class Cinema(models.Model):
     active = models.BooleanField(default=True)
 
     def __str__(self):
-        return "{}{}".format(self.movie_name, self.release_date)
+        return "{}-{}".format(self.movie_name, self.release_date)
 
 
 class CinemaDeck(models.Model):
