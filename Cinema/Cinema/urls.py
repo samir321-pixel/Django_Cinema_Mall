@@ -39,4 +39,5 @@ urlpatterns = [
     path('rest-auth/registration/', include('rest_auth.registration.urls')),
     path('managecinema/', include('managecinema.urls')),
     path('cinema_booking/', include('cinema_booking.urls')),
+    path('employee/', include('employee.urls')),
 ]

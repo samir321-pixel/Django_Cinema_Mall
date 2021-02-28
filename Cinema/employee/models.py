@@ -1,5 +1,5 @@
 from django.db import models
-
+from djmoney.models.fields import MoneyField
 # Create your models here.
 
 gender_choices = (
@@ -22,7 +22,7 @@ class Employee(models.Model):
     state = models.CharField(max_length=200, null=True, blank=True)
     pincode = models.PositiveIntegerField(default=0)
     joining_date = models.DateField()
-    salary = models.PositiveIntegerField(default=0)
+    salary = MoneyField(default=0, default_currency='INR', max_digits=11)
     salary_due_date = models.DateField()
     releasing_date = models.DateField(null=True, blank=True)
 
