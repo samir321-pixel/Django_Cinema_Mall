@@ -6,6 +6,7 @@ from .serializers import *
 from rest_framework.response import Response
 from rest_framework.filters import SearchFilter, OrderingFilter
 from django_filters.rest_framework import DjangoFilterBackend
+from django.core.exceptions import ObjectDoesNotExist
 
 
 # Create your views here.
@@ -65,7 +66,7 @@ class BookSeatsViewsets(viewsets.ModelViewSet):
         if self.request.user.is_admin or self.request.user.is_employee:
             serializer = BookSeatWriteSerializer(queryset, data=self.request.data, partial=True)
             if serializer.is_valid(raise_exception=True):
-                serializer.save()
+                serializer.save(updated_at=datetime.now())
                 serializer = BookSeatReadSerializer(queryset)
                 return Response(serializer.data, status=200)
             return Response({"NO_ACCESS": "Access Denied"}, status=401)
@@ -79,6 +80,65 @@ class BookSeatsViewsets(viewsets.ModelViewSet):
                 instance.delete()
                 return Response({"Seat Deleted": "Access Granted"}, status=204)
             except:
+                return Response({"DOES_NOT_EXIST": "Does not exist"}, status=400)
+        else:
+            return Response({"NO_ACCESS": "Access Denied"}, status=401)
+
+
+class SeatManagerViewsets(viewsets.ModelViewSet):
+    queryset = seat_manager.objects.all().order_by('-created_at')
+    serializer_class = SeatManagerSerializer
+    permission_classes = (IsAuthenticated,)
+    lookup_field = "id"
+
+    def get_queryset(self):
+        return seat_manager.objects.all()
+
+    def perform_create(self, serializer):
+        serializer = self.get_serializer(data=self.request.data)
+        if serializer.is_valid(raise_exception=True):
+            if self.request.user.is_admin or self.request.user.is_employee:
+                serializer.save()
+                return Response(serializer.data, status=200)
+            else:
+                return Response({"NO_ACCESS": "Access Denied"}, status=401)
+        else:
+            return Response(serializer.errors, status=400)
+
+    def retrieve(self, request, *args, **kwargs):
+        if self.request.user.is_admin or self.request.user.is_employee:
+            try:
+                queryset = seat_manager.objects.get(id=self.kwargs["id"])
+                serializer = self.get_serializer(queryset)
+                return Response(serializer.data, status=200)
+            except ObjectDoesNotExist:
+                return Response({"DOES_NOT_EXIST": "Does not exist"}, status=400)
+        else:
+            return Response({"NO_ACCESS": "Access Denied"}, status=401)
+
+    def update(self, request, *args, **kwargs):
+        try:
+            if self.request.user.is_admin or self.request.user.is_employee:
+                try:
+                    queryset = seat_manager.objects.get(id=self.kwargs["id"])
+                    serializer = self.get_serializer(queryset, data=self.request.data, partial=True)
+                    if serializer.is_valid(raise_exception=True):
+                        serializer.save(updated_at=datetime.now())
+                        return Response(serializer.data, status=200)
+                    else:
+                        return Response(serializer.errors, status=400)
+                except ObjectDoesNotExist:
+                    return Response({"DOES_NOT_EXIST": "Does not exist"}, status=400)
+        except:
+            return Response({"NO_ACCESS": "Access Denied"}, status=401)
+
+    def perform_destroy(self, instance):
+        if self.request.user.is_admin or self.request.user.is_superuser:
+            try:
+                queryset = seat_manager.objects.get(id=self.kwargs["id"])
+                queryset.delete()
+                return Response({"Successful": "successful"}, status=204)
+            except ObjectDoesNotExist:
                 return Response({"DOES_NOT_EXIST": "Does not exist"}, status=400)
         else:
             return Response({"NO_ACCESS": "Access Denied"}, status=401)

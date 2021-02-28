@@ -10,7 +10,7 @@ class Cinema(models.Model):
     release_date = models.DateField(auto_now=False)
     description = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    updated_at = models.DateTimeField(auto_now_add=True)
     active = models.BooleanField(default=True)
 
     def __str__(self):
@@ -22,7 +22,7 @@ class CinemaDeck(models.Model):
     deck_name = models.CharField(max_length=200, unique=True)
     price = MoneyField(default=0, default_currency='INR', max_digits=11)
     created_at = models.DateTimeField(auto_now=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    updated_at = models.DateTimeField(auto_now_add=True)
     active = models.BooleanField(default=True)
 
     def __str__(self):
@@ -33,7 +33,7 @@ class MovieDurationSlot(models.Model):
     id = models.AutoField(primary_key=True)
     duration = models.DurationField(unique=True)
     created_at = models.DateTimeField(auto_now=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    updated_at = models.DateTimeField(auto_now_add=True)
     active = models.BooleanField(default=True)
 
     def __str__(self):
@@ -47,7 +47,7 @@ class CinemaArrangeSlot(models.Model):
     duration_slot = models.ForeignKey("managecinema.MovieDurationSlot", on_delete=models.CASCADE)
     end_time = models.TimeField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    updated_at = models.DateTimeField(auto_now_add=True)
     active = models.BooleanField(default=True)
 
     def __str__(self):

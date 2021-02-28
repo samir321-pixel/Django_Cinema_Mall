@@ -32,3 +32,9 @@ class BookSeatWriteSerializer(serializers.ModelSerializer):
     class Meta:
         model = BookSeat
         fields = '__all__'
+
+
+class SeatManagerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = seat_manager
+        fields = '__all__'
