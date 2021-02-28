@@ -13,7 +13,24 @@
 * Database
   * SQLite3
 
-  
+# Backend Setup
+# Install the requirements:
+```bash
+pip install -r requirements.txt
+```
+
+# run migrate
+
+```bash
+python manage.py migrate
+```
+
+# create superuser
+
+```bash
+python manage.py createsuperuser
+```
+
 ## Tech Stack Involved
 <div style="display: flex;justify-content: center;">
 <img height="64px" width="auto" src="https://image.flaticon.com/icons/svg/919/919852.svg">
