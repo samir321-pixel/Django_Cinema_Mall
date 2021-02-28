@@ -1,4 +1,4 @@
-from datetime import datetime
+import datetime
 from creditcards.models import CardNumberField, CardExpiryField, SecurityCodeField
 from django.db import models
 from djmoney.models.fields import MoneyField
@@ -42,12 +42,21 @@ class Seat(models.Model):
     def __str__(self):
         return "{}-{}-{}-{}".format(self.seat, self.name, self.date, self.deck)
 
-    def seat_updater(self, seat, user):
+    def seat_book(self, seat, user):
         query = Seat.objects.get(id=seat)
         query.book = True
         query.book_by = user
-        query.updated_at = datetime.now()
+        query.updated_at = datetime.datetime.now()
         query.save()
+
+    def seat_updater(self):
+        for i in Seat.objects.all():
+            try:
+                if datetime.datetime.now() > datetime.datetime.combine(i.date, datetime.time(0, 0)):
+                    i.active = False
+                    i.save()
+            except Exception as e:
+                pass
 
 
 class BookSeat(models.Model):

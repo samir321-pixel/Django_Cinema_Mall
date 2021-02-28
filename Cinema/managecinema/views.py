@@ -55,6 +55,7 @@ class CinemaDeckViewsets(viewsets.ModelViewSet):
     queryset = CinemaDeck.objects.all()
     serializer_class = CinemaDeckSerializer
     permission_classes = (IsAuthenticated,)
+    lookup_field = 'id'
 
     def get_queryset(self):
         return CinemaDeck.objects.all().order_by('-created_at')
@@ -63,7 +64,7 @@ class CinemaDeckViewsets(viewsets.ModelViewSet):
         if self.request.user.is_admin or self.request.user.is_employee:
             serializer = self.get_serializer(data=request.data)
             if serializer.is_valid(raise_exception=True):
-                serializer.save()
+                serializer.save(active=True)
             return Response(serializer.data, status=200)
         else:
             return Response({"NO_ACCESS": "Access Denied"}, status=401)
@@ -76,7 +77,7 @@ class CinemaDeckViewsets(viewsets.ModelViewSet):
         if self.request.user.is_admin or self.request.user.is_employee:
             serializer = self.get_serializer(instance, data=request.data, partial=True)
             if serializer.is_valid(raise_exception=True):
-                serializer.save()
+                serializer.save(updated_at=datetime.datetime.now())
                 return Response(serializer.data, status=200)
             else:
                 return Response({"error": "Access Denied"}, status=401)
@@ -97,6 +98,7 @@ class CinemaSlotsDurationViewsets(viewsets.ModelViewSet):
     queryset = MovieDurationSlot.objects.all()
     serializer_class = MovieDurationSlotSerializer
     permission_classes = (IsAuthenticated,)
+    lookup_field = 'id'
 
     def get_queryset(self):
         return MovieDurationSlot.objects.all().order_by('-created_at')
@@ -105,7 +107,7 @@ class CinemaSlotsDurationViewsets(viewsets.ModelViewSet):
         if self.request.user.is_admin or self.request.user.is_employee:
             serializer = self.get_serializer(data=request.data)
             if serializer.is_valid(raise_exception=True):
-                serializer.save()
+                serializer.save(active=True)
             return Response(serializer.data, status=200)
         else:
             return Response({"NO_ACCESS": "Access Denied"}, status=401)

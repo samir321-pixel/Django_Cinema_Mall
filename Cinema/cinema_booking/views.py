@@ -25,6 +25,7 @@ class SeatsViewsets(viewsets.ModelViewSet):
         CinemaArrangeSlot.slot_updater(self=self)
         CinemaArrangeSlot.slot_maker(self=self)
         CinemaArrangeSlot.seat_maker(self=self)
+        Seat.seat_updater(self=self)
         return Seat.objects.all().order_by('-date')
 
 
@@ -42,7 +43,7 @@ class BookSeatsViewsets(viewsets.ModelViewSet):
         if serializer.is_valid(raise_exception=True):
             if self.request.user.is_admin or self.request.user.is_employee or self.request.user.is_customer:
                 serializer.save(user=self.request.user)
-                Seat.seat_updater(self=self, seat=self.request.data.get('seat'), user=self.request.user)
+                Seat.seat_book(self=self, seat=self.request.data.get('seat'), user=self.request.user)
                 return Response(serializer.data, status=200)
             else:
                 return Response({"NO_ACCESS": "Access Denied"}, status=401)
