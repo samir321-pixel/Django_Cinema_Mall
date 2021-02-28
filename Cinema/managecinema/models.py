@@ -80,7 +80,8 @@ class CinemaArrangeSlot(models.Model):
     def slot_updater(self):
         for i in Available_Slots.objects.all():
             try:
-                if datetime.datetime.now() > datetime.datetime.combine(i.date, datetime.time(0, 0)):
+                date = datetime.datetime.now() - datetime.timedelta(days=1)
+                if date > datetime.datetime.combine(i.date, datetime.time(0, 0)):
                     i.active = False
                     i.save()
             except Exception as e:

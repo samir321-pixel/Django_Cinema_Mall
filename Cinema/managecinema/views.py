@@ -141,6 +141,7 @@ class CinemaArrangeSlotViewsets(viewsets.ModelViewSet):
     queryset = CinemaArrangeSlot.objects.all().order_by('created_at')
     serializer_class = CinemaArrangeSlotWriteSerializer
     permission_classes = (IsAuthenticated,)
+    lookup_field = 'id'
 
     def list(self, request, *args, **kwargs):
         serializer = CinemaArrangeSlotReadSerializer(self.get_queryset(), many=True)
