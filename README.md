@@ -42,6 +42,6 @@ python manage.py createsuperuser
 ***
 ## Useful Resources
 - [Django Docs](https://docs.djangoproject.com/en/3.0/)
-- [Django Rest FrameworkDocs](https://www.django-rest-framework.org/)
+- [Django Rest Framework Docs](https://www.django-rest-framework.org/)
 - [Git and GitHub](https://www.digitalocean.com/community/tutorials/how-to-use-git-a-reference-guide)
 
