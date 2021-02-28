@@ -5,3 +5,4 @@ from .models import *
 admin.site.register(Available_Slots)
 admin.site.register(Seat)
 admin.site.register(seat_manager)
+admin.site.register(BookSeat)

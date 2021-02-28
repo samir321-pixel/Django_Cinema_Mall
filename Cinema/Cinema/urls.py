@@ -23,7 +23,7 @@ schema_view = get_schema_view(
     openapi.Info(
         title="CINEMA API",
         default_version='v1',
-        description="",
+        description="List of API",
         terms_of_service="https://www.ourapp.com/policies/terms/",
         contact=openapi.Contact(email="saitwalsamir@gmail.com"),
         license=openapi.License(name="Test License"),

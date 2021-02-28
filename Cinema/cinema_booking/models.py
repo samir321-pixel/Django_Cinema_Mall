@@ -30,6 +30,7 @@ class Seat(models.Model):
     date = models.DateField(auto_now=False)
     seat = models.ForeignKey("cinema_booking.seat_manager", on_delete=models.CASCADE)
     available_slot = models.ForeignKey("cinema_booking.Available_Slots", on_delete=models.CASCADE)
+    book_by = models.ForeignKey("user.User", on_delete=models.CASCADE, null=True, blank=True)
     created_at = models.DateTimeField(auto_now=True)
     updated_at = models.DateTimeField(auto_now=True)
     active = models.BooleanField(default=True)
@@ -37,3 +38,14 @@ class Seat(models.Model):
 
     def __str__(self):
         return "{}-{}-{}-{}".format(self.seat, self.name, self.date, self.deck)
+
+
+class BookSeat(models.Model):
+    id = models.AutoField(primary_key=True)
+    seat = models.ForeignKey(Seat, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    user = models.ForeignKey("user.User", on_delete=models.CASCADE, null=True, blank=True)
+
+    def __str__(self):
+        return "{}-{}".format(self.seat, self.user)
