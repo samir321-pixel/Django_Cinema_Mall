@@ -46,7 +46,6 @@ INSTALLED_APPS = [
     'localflavor',
     'rest_auth.registration',
     'user',
-    'customer',
     'employee',
     'managecinema',
     'corsheaders',
