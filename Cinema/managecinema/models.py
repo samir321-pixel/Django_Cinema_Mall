@@ -67,7 +67,7 @@ class CinemaArrangeSlot(models.Model):
                     pass
 
     def seat_maker(self):
-        for i in CinemaDeck.objects.all():
+        for i in CinemaDeck.objects.filter(active=True):
             for j in seat_manager.objects.all():
                 for k in Available_Slots.objects.filter(active=True):
                     for l in range(0, 2):
