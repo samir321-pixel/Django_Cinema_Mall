@@ -29,7 +29,7 @@ class SeatsViewsets(viewsets.ModelViewSet):
 
 class BookSeatsViewsets(viewsets.ModelViewSet):
     queryset = BookSeat.objects.all().order_by('-created_at')
-    serializer_class = BookSeatSerializer
+    serializer_class = BookSeatReadSerializer
     permission_classes = (IsAuthenticated,)
     lookup_field = "id"
 
@@ -37,11 +37,12 @@ class BookSeatsViewsets(viewsets.ModelViewSet):
         return BookSeat.objects.filter(user=self.request.user).order_by('-created_at')
 
     def perform_create(self, serializer):
-        serializer = BookSeatSerializer(data=self.request.data)
+        serializer = BookSeatWriteSerializer(data=self.request.data)
         if serializer.is_valid(raise_exception=True):
             if self.request.user.is_admin or self.request.user.is_employee or self.request.user.is_customer:
                 serializer.save(user=self.request.user)
-                return Response({"Seat Booked": "Access Granted"})
+                Seat.seat_updater(self=self, seat=self.request.data.get('seat'), user=self.request.user)
+                return Response(serializer.data, status=200)
             else:
                 return Response({"NO_ACCESS": "Access Denied"}, status=401)
         else:
@@ -51,7 +52,7 @@ class BookSeatsViewsets(viewsets.ModelViewSet):
         if self.request.user.is_admin or self.request.user.is_employee or self.request.user.is_customer:
             try:
                 queryset = BookSeat.objects.get(id=self.kwargs["id"])
-                serializer = BookSeatSerializer(queryset)
+                serializer = BookSeatReadSerializer(queryset)
                 return Response(serializer.data, status=200)
             except:
                 return Response({"DOES_NOT_EXIST": "Does not exist"}, status=400)
@@ -59,12 +60,13 @@ class BookSeatsViewsets(viewsets.ModelViewSet):
             return Response({"NO_ACCESS": "Access Denied"}, status=401)
 
     def perform_update(self, serializer):
+        # only admin or employee will be able to update and delete
         queryset = BookSeat.objects.get(id=self.kwargs["id"])
         if self.request.user.is_admin or self.request.user.is_employee:
-            serializer = BookSeatSerializer(queryset, data=self.request.data, partial=True)
+            serializer = BookSeatWriteSerializer(queryset, data=self.request.data, partial=True)
             if serializer.is_valid(raise_exception=True):
                 serializer.save()
-                serializer = BookSeatSerializer(queryset)
+                serializer = BookSeatReadSerializer(queryset)
                 return Response(serializer.data, status=200)
             return Response({"NO_ACCESS": "Access Denied"}, status=401)
         else:

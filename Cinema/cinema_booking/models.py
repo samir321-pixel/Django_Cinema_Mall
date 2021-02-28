@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.db import models
 
 
@@ -32,17 +34,24 @@ class Seat(models.Model):
     available_slot = models.ForeignKey("cinema_booking.Available_Slots", on_delete=models.CASCADE)
     book_by = models.ForeignKey("user.User", on_delete=models.CASCADE, null=True, blank=True)
     created_at = models.DateTimeField(auto_now=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    updated_at = models.DateTimeField(auto_now=False)
     active = models.BooleanField(default=True)
     book = models.BooleanField(default=False)
 
     def __str__(self):
         return "{}-{}-{}-{}".format(self.seat, self.name, self.date, self.deck)
 
+    def seat_updater(self, seat, user):
+        query = Seat.objects.get(id=seat)
+        query.book = True
+        query.book_by = user
+        query.updated_at = datetime.now()
+        query.save()
+
 
 class BookSeat(models.Model):
     id = models.AutoField(primary_key=True)
-    seat = models.ForeignKey(Seat, on_delete=models.CASCADE)
+    seat = models.ForeignKey(Seat, on_delete=models.CASCADE, unique=True)
     created_at = models.DateTimeField(auto_now=True)
     updated_at = models.DateTimeField(auto_now=True)
     user = models.ForeignKey("user.User", on_delete=models.CASCADE, null=True, blank=True)
