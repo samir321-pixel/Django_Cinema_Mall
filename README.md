@@ -13,6 +13,13 @@
 * Database
   * SQLite3
 
+## Tech Stack Involved
+<div style="display: flex;justify-content: center;">
+<img height="64px" width="auto" src="https://image.flaticon.com/icons/svg/919/919852.svg">
+ <br/>
+<img height="64px" width="auto" src="https://twilio-cms-prod.s3.amazonaws.com/images/django-dark.width-808.png">
+  <br/>
+<div/>
 # Installation Setup
 First, clone the repository to your local machine:
 
@@ -72,13 +79,7 @@ The project will be available at http://127.0.0.1:8000/
 [![ForTheBadge built-by-developers](http://ForTheBadge.com/images/badges/built-by-developers.svg)](https://github.com/samir321-pixel)
 
 
-## Tech Stack Involved
-<div style="display: flex;justify-content: center;">
-<img height="64px" width="auto" src="https://image.flaticon.com/icons/svg/919/919852.svg">
- <br/>
-<img height="64px" width="auto" src="https://twilio-cms-prod.s3.amazonaws.com/images/django-dark.width-808.png">
-  <br/>
-<div/>
+
 
 ***
 ## Useful Resources
