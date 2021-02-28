@@ -1,5 +1,6 @@
 from django.db import models
 from djmoney.models.fields import MoneyField
+from phone_field import PhoneField
 
 # Create your models here.
 
@@ -18,6 +19,7 @@ class Employee(models.Model):
     DOB = models.DateField()
     gender = models.CharField(max_length=10, choices=gender_choices)
     active = models.BooleanField(default=True)
+    phone = PhoneField()
     Address = models.CharField(max_length=200, null=True, blank=True)
     city = models.CharField(max_length=20, null=True, blank=True)
     state = models.CharField(max_length=200, null=True, blank=True)

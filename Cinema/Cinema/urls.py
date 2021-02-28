@@ -40,4 +40,5 @@ urlpatterns = [
     path('managecinema/', include('managecinema.urls')),
     path('cinema_booking/', include('cinema_booking.urls')),
     path('employee/', include('employee.urls')),
+
 ]
