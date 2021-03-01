@@ -19,3 +19,8 @@ class Notification(models.Model):
 
     def __str__(self):
         return "{}-{}-{}".format(self.user, self.type, self.seat)
+
+    def notification_read(self, user):
+        for i in Notification.objects.filter(user=user):
+            i.read = True
+            i.save()
