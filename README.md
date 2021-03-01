@@ -64,10 +64,12 @@ The project will be available at http://127.0.0.1:8000/
 
 
 ## Only Admin or Employee accessible API
-* Add, Update, Delete, Patch Movie
+* Add, Update, Delete, Patch Movie : 
 ```/managecinema/cinema/```
-* Arrange slot For Movie
+* Add, Update, Delete, Patch slot For Movie : 
 ```/managecinema/cinema_arrange_slot/```
+* Add, Update, Delete, Patch Movie Decks :
+```/managecinema/cinema_deck/```
 
 ## 🌏 Browser Support
 
