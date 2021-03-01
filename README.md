@@ -41,7 +41,7 @@ pip install -r requirements.txt
 python manage.py migrate
 ```
 
-# Add your GmailID and Password in settings.py
+# add gmail and password in settings.py
 ```
 EMAIL_HOST_USER = 'yourgmailid.com'
 EMAIL_HOST_PASSWORD = 'yourgmailpassword'
