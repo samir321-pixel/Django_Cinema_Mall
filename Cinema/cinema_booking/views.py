@@ -9,9 +9,17 @@ from django.core.exceptions import ObjectDoesNotExist
 
 
 # Create your views here.
-class AvailableSlotsViewsets(viewsets.ModelViewSet):
-    queryset = Available_Slots.objects.all()
+class AvailableSlotsViewsets(generics.ListAPIView):
+    queryset = Available_Slots.objects.all().order_by('-date')
     serializer_class = AvailableSlotsReadSerializer
+    filter_backends = [SearchFilter, ]
+    search_fields = ['date']
+
+    def list(self, request):
+        queryset = self.get_queryset()
+        queryset = self.filter_queryset(queryset)
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data, status=200)
 
 
 class SeatsList(generics.ListAPIView):
