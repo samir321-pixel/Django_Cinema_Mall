@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'drf_yasg',
     'cinema_booking',
+    'cinema_notification',
 ]
 SITE_ID = 1
 MIDDLEWARE = [
