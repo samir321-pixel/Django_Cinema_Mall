@@ -61,9 +61,12 @@ class BookSeatsViewsets(viewsets.ModelViewSet):
                 data = serializer.save(user=self.request.user, booking_price=deck_query.price)
                 Seat.seat_book(self=self, seat=self.request.data.get('seat'), user=self.request.user)
                 Notification.objects.create(seat=data, user=self.request.user,
-                                            text="Hello {}, you have book movie {}, on date {}.".format(self.request.user,
-                                                                                                   cinema_query.movie_name,
-                                                                                                   available_slot_query.date))
+                                            text="Hello {}, you have book movie {}, on date {}.".format(
+                                                self.request.user,
+                                                cinema_query.movie_name,
+                                                available_slot_query.date))
+                BookSeat.send_mail(user=self.request.user, movie=cinema_query.movie_name,
+                                   date=available_slot_query.date, email=self.request.user.email, self=self)
                 return Response(serializer.data, status=200)
             else:
                 return Response({"NO_ACCESS": "Access Denied"}, status=401)

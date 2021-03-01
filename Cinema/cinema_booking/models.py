@@ -2,6 +2,7 @@ import datetime
 from creditcards.models import CardNumberField, CardExpiryField, SecurityCodeField
 from django.db import models
 from djmoney.models.fields import MoneyField
+from django.core.mail import send_mail
 
 
 class Available_Slots(models.Model):
@@ -73,3 +74,11 @@ class BookSeat(models.Model):
 
     def __str__(self):
         return "{}-{}".format(self.seat, self.user)
+
+    def send_mail(self, user, email, movie, date):
+        subject = "Seat Booked"
+        message = "Hello {}, you have book movie {}, on date {}.".format(user, movie, date)
+        try:
+            send_mail(subject, message, email, [email])
+        except Exception as e:
+            print(e)
