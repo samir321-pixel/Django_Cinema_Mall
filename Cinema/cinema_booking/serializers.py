@@ -19,16 +19,7 @@ class SeatSerializer(serializers.ModelSerializer):
         depth = 1
 
 
-class BookSeatReadSerializer(serializers.ModelSerializer):
-    seat = SeatSerializer()
-
-    class Meta:
-        model = BookSeat
-        fields = '__all__'
-        depth = 2
-
-
-class BookSeatWriteSerializer(serializers.ModelSerializer):
+class BookSeatSerializer(serializers.ModelSerializer):
     class Meta:
         model = BookSeat
         fields = '__all__'

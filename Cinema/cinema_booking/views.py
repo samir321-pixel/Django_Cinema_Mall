@@ -1,4 +1,4 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, generics
 from rest_framework.permissions import IsAuthenticated
 from managecinema.models import CinemaArrangeSlot
 from .models import *
@@ -14,31 +14,33 @@ class AvailableSlotsViewsets(viewsets.ModelViewSet):
     serializer_class = AvailableSlotsReadSerializer
 
 
-class SeatsViewsets(viewsets.ModelViewSet):
+class SeatsList(generics.ListAPIView):
     queryset = Seat.objects.all().order_by('-date')
     filter_backends = [SearchFilter, ]
-    serializer_class = SeatSerializer
     search_fields = ['name', 'deck__deck_name', 'date']
 
-    def get_queryset(self):
+    def list(self, request):
+        queryset = self.get_queryset()
+        queryset = self.filter_queryset(queryset)
         CinemaArrangeSlot.slot_updater(self=self)
         CinemaArrangeSlot.slot_maker(self=self)
         CinemaArrangeSlot.seat_maker(self=self)
         Seat.seat_updater(self=self)
-        return Seat.objects.all().order_by('-date')
+        serializer = SeatSerializer(queryset, many=True)
+        return Response(serializer.data, status=200)
 
 
 class BookSeatsViewsets(viewsets.ModelViewSet):
     queryset = BookSeat.objects.all().order_by('-created_at')
-    serializer_class = BookSeatReadSerializer
+    serializer_class = BookSeatSerializer
     permission_classes = (IsAuthenticated,)
     lookup_field = "id"
 
     def get_queryset(self):
         return BookSeat.objects.filter(user=self.request.user).order_by('-created_at')
 
-    def perform_create(self, serializer):
-        serializer = BookSeatWriteSerializer(data=self.request.data)
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=self.request.data)
         if serializer.is_valid(raise_exception=True):
             if self.request.user.is_admin or self.request.user.is_employee or self.request.user.is_customer:
                 serializer.save(user=self.request.user)
@@ -53,7 +55,7 @@ class BookSeatsViewsets(viewsets.ModelViewSet):
         if self.request.user.is_admin or self.request.user.is_employee or self.request.user.is_customer:
             try:
                 queryset = BookSeat.objects.get(id=self.kwargs["id"])
-                serializer = BookSeatReadSerializer(queryset)
+                serializer = BookSeatSerializer(queryset)
                 return Response(serializer.data, status=200)
             except:
                 return Response({"DOES_NOT_EXIST": "Does not exist"}, status=400)
@@ -64,10 +66,10 @@ class BookSeatsViewsets(viewsets.ModelViewSet):
         # only admin or employee will be able to update and delete
         queryset = BookSeat.objects.get(id=self.kwargs["id"])
         if self.request.user.is_admin or self.request.user.is_employee:
-            serializer = BookSeatWriteSerializer(queryset, data=self.request.data, partial=True)
+            serializer = self.get_serializer(queryset, data=self.request.data, partial=True)
             if serializer.is_valid(raise_exception=True):
                 serializer.save(updated_at=datetime.now())
-                serializer = BookSeatReadSerializer(queryset)
+                serializer = BookSeatSerializer(queryset)
                 return Response(serializer.data, status=200)
             return Response({"NO_ACCESS": "Access Denied"}, status=401)
         else:
