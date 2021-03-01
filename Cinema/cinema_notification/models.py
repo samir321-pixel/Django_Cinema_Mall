@@ -9,7 +9,7 @@ STATUS = (
 
 class Notification(models.Model):
     id = models.AutoField(primary_key=True)
-    text = models.TextField(max_length=200)
+    text = models.TextField(max_length=100)
     user = models.ForeignKey('user.User', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now=True)
     updated_at = models.DateTimeField(auto_now_add=True)

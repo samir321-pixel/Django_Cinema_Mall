@@ -1,6 +1,8 @@
 from rest_framework import viewsets, generics
 from rest_framework.permissions import IsAuthenticated
-from managecinema.models import CinemaArrangeSlot, CinemaDeck
+
+from cinema_notification.models import Notification
+from managecinema.models import CinemaArrangeSlot, CinemaDeck, Cinema
 from .models import *
 from .serializers import *
 from rest_framework.response import Response
@@ -53,8 +55,15 @@ class BookSeatsViewsets(viewsets.ModelViewSet):
             if self.request.user.is_admin or self.request.user.is_employee or self.request.user.is_customer:
                 seat_query = Seat.objects.get(id=self.request.data.get('seat'))
                 deck_query = CinemaDeck.objects.get(id=seat_query.deck.id)
-                serializer.save(user=self.request.user, booking_price=deck_query.price)
+                available_slot_query = Available_Slots.objects.get(id=seat_query.available_slot.id)
+                arrrange_slot_query = CinemaArrangeSlot.objects.get(id=available_slot_query.slot.id)
+                cinema_query = Cinema.objects.get(id=arrrange_slot_query.cinema.id)
+                data = serializer.save(user=self.request.user, booking_price=deck_query.price)
                 Seat.seat_book(self=self, seat=self.request.data.get('seat'), user=self.request.user)
+                Notification.objects.create(seat=data, user=self.request.user,
+                                            text="Hello {}, you have book movie {}, on date {}.".format(self.request.user,
+                                                                                                   cinema_query.movie_name,
+                                                                                                   available_slot_query.date))
                 return Response(serializer.data, status=200)
             else:
                 return Response({"NO_ACCESS": "Access Denied"}, status=401)
