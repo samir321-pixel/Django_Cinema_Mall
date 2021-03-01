@@ -1,6 +1,6 @@
 from rest_framework import viewsets, generics
 from rest_framework.permissions import IsAuthenticated
-from managecinema.models import CinemaArrangeSlot
+from managecinema.models import CinemaArrangeSlot, CinemaDeck
 from .models import *
 from .serializers import *
 from rest_framework.response import Response
@@ -51,7 +51,9 @@ class BookSeatsViewsets(viewsets.ModelViewSet):
         serializer = self.get_serializer(data=self.request.data)
         if serializer.is_valid(raise_exception=True):
             if self.request.user.is_admin or self.request.user.is_employee or self.request.user.is_customer:
-                serializer.save(user=self.request.user)
+                seat_query = Seat.objects.get(id=self.request.data.get('seat'))
+                deck_query = CinemaDeck.objects.get(id=seat_query.deck.id)
+                serializer.save(user=self.request.user, booking_price=deck_query.price)
                 Seat.seat_book(self=self, seat=self.request.data.get('seat'), user=self.request.user)
                 return Response(serializer.data, status=200)
             else:

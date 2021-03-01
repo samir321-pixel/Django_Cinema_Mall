@@ -20,6 +20,8 @@ class SeatSerializer(serializers.ModelSerializer):
 
 
 class BookSeatSerializer(serializers.ModelSerializer):
+    booking_price = serializers.CharField(max_length=200, allow_null=True)
+
     class Meta:
         model = BookSeat
         fields = '__all__'

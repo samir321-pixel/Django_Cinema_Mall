@@ -62,7 +62,7 @@ class Seat(models.Model):
 class BookSeat(models.Model):
     id = models.AutoField(primary_key=True)
     seat = models.OneToOneField(Seat, on_delete=models.CASCADE, unique=True)
-    booking_price = MoneyField(default=0, default_currency='INR', max_digits=11)
+    booking_price = MoneyField(default=0, default_currency='INR', max_digits=11, null=True, blank=True)
     name_on_card = models.CharField(max_length=150)
     cc_number = CardNumberField('card number')
     cc_expiry = CardExpiryField('expiration date')
