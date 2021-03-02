@@ -70,6 +70,8 @@ The project will be available at http://127.0.0.1:8000/
 ```/managecinema/cinema_arrange_slot/```
 * Add, Update, Delete, Patch Movie Decks :
 ```/managecinema/cinema_deck/```
+* Add, Update, Delete, Patch Movie Duration Slot:
+```/managecinema/cinema_slots_duration/```
 
 ## 🌏 Browser Support
 
