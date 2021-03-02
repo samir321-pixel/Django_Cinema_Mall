@@ -1,6 +1,5 @@
 from rest_framework import viewsets, generics
 from rest_framework.permissions import IsAuthenticated
-
 from cinema_notification.models import Notification
 from managecinema.models import CinemaArrangeSlot, CinemaDeck, Cinema
 from .models import *

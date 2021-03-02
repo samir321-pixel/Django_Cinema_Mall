@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'user',
     'employee',
     'managecinema',
+    'cinema_feedback',
     'corsheaders',
     'drf_yasg',
     'cinema_booking',
