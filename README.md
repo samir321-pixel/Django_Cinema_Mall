@@ -4,7 +4,7 @@
 <h1 align="center">Django-Cinema-Mall</h1>
 
 
-## Introduction
+## 	✈️ Introduction
 * In this repo, I am creating complete Cinema mall backend API's with Django Rest Framework.
 
 ## Technology Stack
