@@ -77,8 +77,8 @@ The project will be available at http://127.0.0.1:8000/
 * Add, Update, Delete, Patch Seat Name : 
 ```/cinema_booking/seat_manager/```
 
-## 🏷️ Scope of project 🏷️
-# Version 1.0
+# 🏷️ Scope of project 🏷️
+## Beta Version -
 * Upcoming 3 days booking empty seat will be created as soon as admin or Employee create necessary slots.
 * In each deck two empty seats are provided for each Time slots for upcoming 3 days.
 * Customer able to book one seat at a time.
