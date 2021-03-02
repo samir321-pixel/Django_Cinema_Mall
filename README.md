@@ -63,8 +63,8 @@ python manage.py runserver
 The project will be available at http://127.0.0.1:8000/
 
 
-## Create Necessary data first for Start Booking Service.
-# This API will be accessible by only Admin or Employee.
+# Create Necessary data first for Start Booking Service.
+## This API will be accessible by only Admin or Employee.
 * Add, Update, Delete, Patch Movie : 
 ```/managecinema/cinema/```
 * Add, Update, Delete, Patch slot For Movie : 
