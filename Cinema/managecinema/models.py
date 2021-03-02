@@ -12,6 +12,7 @@ class Cinema(models.Model):
     created_at = models.DateTimeField(auto_now=True)
     updated_at = models.DateTimeField(auto_now_add=True)
     active = models.BooleanField(default=True)
+    all_review = models.ManyToManyField("cinema_feedback.Review")
 
     def __str__(self):
         return "{}-{}".format(self.movie_name, self.release_date)
@@ -24,7 +25,6 @@ class CinemaDeck(models.Model):
     created_at = models.DateTimeField(auto_now=True)
     updated_at = models.DateTimeField(auto_now_add=True)
     active = models.BooleanField(default=True)
-    review = models.ManyToManyField("cinema_feedback.Review")
 
     def __str__(self):
         return "{}{}".format(self.deck_name, self.price)
@@ -50,7 +50,6 @@ class CinemaArrangeSlot(models.Model):
     created_at = models.DateTimeField(auto_now=True)
     updated_at = models.DateTimeField(auto_now_add=True)
     active = models.BooleanField(default=True)
-
 
     def __str__(self):
         return "{}-{}".format(self.cinema, self.start_time)
