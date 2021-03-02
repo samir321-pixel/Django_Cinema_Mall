@@ -7,7 +7,7 @@
 ## 	✈️ Introduction
 * In this repo, I am creating complete Cinema mall backend API's with Django Rest Framework.
 
-## Technology Stack
+## 🚀 Technology Stack
 * Backend
   * Python
   * Django 
@@ -15,7 +15,7 @@
 * Database
   * SQLite3
 
-## Tech Stack Involved
+## 🛰️ Tech Stack Involved
 <div style="display: flex;justify-content: center;">
 <img height="64px" width="auto" src="https://image.flaticon.com/icons/svg/919/919852.svg">
  <br/>
@@ -85,7 +85,7 @@ The project will be available at http://127.0.0.1:8000/
 
 
 
-## Project Admin
+## 🏆 Project Admin 🏆
 [![Maintenance](https://img.shields.io/maintenance/yes/2020?color=green&logo=github)](https://github.com/samir321-pixel)
 
 > **_Need help?_** 
@@ -106,7 +106,7 @@ The project will be available at http://127.0.0.1:8000/
 
 
 ***
-## Useful Resources
+## 📘 Useful Resources 📘
 - [Django Docs](https://docs.djangoproject.com/en/3.0/)
 - [Django Rest Framework Docs](https://www.django-rest-framework.org/)
 - [Git and GitHub](https://www.digitalocean.com/community/tutorials/how-to-use-git-a-reference-guide)
