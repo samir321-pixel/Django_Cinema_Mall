@@ -64,7 +64,7 @@ The project will be available at http://127.0.0.1:8000/
 
 
 
-# Create Necessary data first for Start Booking Service Using Following API.
+# 💹 Create Necessary data first for Start Booking Service Using Following API. 💹
 * This API will be accessible by only Admin or Employee.
 * Add, Update, Delete, Patch Movie : 
 ```/managecinema/cinema/```
@@ -76,6 +76,12 @@ The project will be available at http://127.0.0.1:8000/
 ```/managecinema/cinema_slots_duration/```
 * Add, Update, Delete, Patch Seat Name : 
 ```/cinema_booking/seat_manager/```
+
+# ✏️ Customer Booking API's ✏️
+* View List of seat present : 
+```/cinema_booking/available_seat/```
+* Book Seat : 
+```/cinema_booking/book_seat/```
 
 # 🏷️ Scope of project 🏷️
 ## Beta Version -
