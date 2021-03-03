@@ -93,10 +93,10 @@ The project will be available at http://127.0.0.1:8000/
 * Yesterday or old slots get inactive according to current date and time so that user can only book upcoming slots seats.
 * Customer can make rating and review for each cinema.
 
-## Full Version
+## Full Version -
 * Get Any number of Screen according to Need.
-* Get Any Number of decks, seats
-* Integration of Paytm 
+* Get Any Number of decks, seats.
+* Integration of Paytm.
 * Book multiple seats at single time.
 * Cancel Booking feature.
 
@@ -116,7 +116,7 @@ The project will be available at http://127.0.0.1:8000/
 
 ## Like This?? Star ⭐ this Repo.
 
-
+## 👮 _For Full Version contact me @ [saitwalsamir@gmail.com](mailto:saitwalsamir@gmail.com?Subject=Library_Project)_** 👮
 
 > Made By Samir Saitwal with ❤️
 
