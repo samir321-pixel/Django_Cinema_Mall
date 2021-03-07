@@ -111,7 +111,7 @@ The project will be available at http://127.0.0.1:8000/
 ## 🏆 Project Admin 🏆
 [![Maintenance](https://img.shields.io/maintenance/yes/2020?color=green&logo=github)](https://github.com/samir321-pixel)
 
-> **_Need help?_** 
+> **_Need help?_ 🤔** 
 > **_Feel free to contact me @ [saitwalsamir@gmail.com](mailto:saitwalsamir@gmail.com?Subject=Library_Project)_**
 
 ## Like This?? Star ⭐ this Repo.
@@ -133,7 +133,7 @@ The project will be available at http://127.0.0.1:8000/
 - [Django Docs](https://docs.djangoproject.com/en/3.0/)
 - [Django Rest Framework Docs](https://www.django-rest-framework.org/)
 - [Git and GitHub](https://www.digitalocean.com/community/tutorials/how-to-use-git-a-reference-guide)
-## Tools
+## 💻 Tools 💻
 
 <a href="gui-tool-tutorials/github-desktop-tutorial.md"><img alt="GitHub Desktop" src="https://desktop.github.com/images/desktop-icon.svg" width="100"></a> 
 <a href="gui-tool-tutorials/github-windows-vs-code-tutorial.md"><img alt="VS Code" src="https://upload.wikimedia.org/wikipedia/commons/2/2d/Visual_Studio_Code_1.18_icon.svg" width=100></a> &nbsp;
