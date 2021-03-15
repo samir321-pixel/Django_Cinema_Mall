@@ -3,7 +3,11 @@
 
 
 <h1 align="center">Django-Cinema-Mall</h1>
-
+   ______   ____   _   __   ______   __  ___   ___ 
+  / ____/  /  _/  / | / /  / ____/  /  |/  /  /   |
+ / /       / /   /  |/ /  / __/    / /|_/ /  / /| |
+/ /___   _/ /   / /|  /  / /___   / /  / /  / ___ |
+\____/  /___/  /_/ |_/  /_____/  /_/  /_/  /_/  |_|
 
 ## 	✈️ Introduction
 * In this repo, I am creating complete Cinema mall backend API's with Django Rest Framework.
