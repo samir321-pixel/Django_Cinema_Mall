@@ -5,6 +5,7 @@
 <h1 align="center">Django-Cinema-Mall</h1>
 
 
+
 ## 	✈️ Introduction
 * In this repo, I am creating complete Cinema mall backend API's with Django Rest Framework.
 
@@ -125,6 +126,11 @@ The project will be available at http://127.0.0.1:8000/
 <br><br>
 [![ForTheBadge built-with-love](http://ForTheBadge.com/images/badges/built-with-love.svg)](https://github.com/samir321-pixel)
 [![ForTheBadge built-by-developers](http://ForTheBadge.com/images/badges/built-by-developers.svg)](https://github.com/samir321-pixel)
+
+
+
+
+
 
 
 
