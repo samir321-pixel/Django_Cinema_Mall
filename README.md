@@ -2,6 +2,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
 
+
 <h1 align="center">Django-Cinema-Mall</h1>
 
 
